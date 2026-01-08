@@ -85,7 +85,7 @@ Page({
 
       const success = await scanVehicles({
         onDeviceFound,
-        deviceName: '9号' // 可以根据实际情况修改
+        deviceName: '首驱' // 可以根据实际情况修改
       });
 
       if (!success) {

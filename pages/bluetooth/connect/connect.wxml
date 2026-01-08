@@ -2,7 +2,7 @@
 <view class="container">
   <view class="header">
     <text class="title">蓝牙连接</text>
-    <text class="subtitle">扫描并连接您的9号电动车</text>
+    <text class="subtitle">扫描并连接您的首驱电动车</text>
   </view>
 
   <!-- 连接状态 -->
