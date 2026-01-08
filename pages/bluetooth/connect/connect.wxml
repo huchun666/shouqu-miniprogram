@@ -1,0 +1,86 @@
+<!--pages/bluetooth/connect/connect.wxml-->
+<view class="container">
+  <view class="header">
+    <text class="title">蓝牙连接</text>
+    <text class="subtitle">扫描并连接您的9号电动车</text>
+  </view>
+
+  <!-- 连接状态 -->
+  <view class="status-card card" wx:if="{{connected}}">
+    <view class="status-header">
+      <view class="status-info">
+        <text class="status-label">已连接</text>
+        <text class="device-name">{{connectedDevice.name || '设备'}}</text>
+      </view>
+      <button class="disconnect-btn" bindtap="disconnectDevice">断开</button>
+    </view>
+  </view>
+
+  <!-- 扫描控制 -->
+  <view class="scan-control card">
+    <view class="control-header">
+      <text class="section-title">设备扫描</text>
+      <text class="scan-status {{scanning ? 'scanning' : ''}}">
+        {{scanning ? '扫描中...' : '未扫描'}}
+      </text>
+    </view>
+    <view class="control-buttons">
+      <button 
+        class="scan-btn {{scanning ? 'scanning' : ''}}" 
+        bindtap="startScanning"
+        disabled="{{scanning}}">
+        {{scanning ? '扫描中' : '开始扫描'}}
+      </button>
+      <button 
+        class="stop-btn" 
+        bindtap="stopScanning"
+        disabled="{{!scanning}}">
+        停止扫描
+      </button>
+      <button class="refresh-btn" bindtap="refreshDevices">刷新</button>
+    </view>
+  </view>
+
+  <!-- 设备列表 -->
+  <view class="devices-section">
+    <view class="section-title">可用设备 ({{devices.length}})</view>
+    <view class="device-list">
+      <view 
+        class="device-item card" 
+        wx:for="{{devices}}" 
+        wx:key="deviceId"
+        bindtap="connectDevice"
+        data-deviceid="{{item.deviceId}}">
+        <view class="device-info">
+          <view class="device-name">{{item.name || '未知设备'}}</view>
+          <view class="device-details">
+            <text class="device-id">ID: {{item.deviceId}}</text>
+            <text class="device-rssi" wx:if="{{item.RSSI}}">信号: {{item.RSSI}}dBm</text>
+          </view>
+        </view>
+        <view class="device-action">
+          <text class="connect-text">连接</text>
+          <text class="arrow">></text>
+        </view>
+      </view>
+
+      <view class="empty" wx:if="{{!scanning && devices.length === 0}}">
+        <text>暂无设备，请点击"开始扫描"</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 使用提示 -->
+  <view class="tips card">
+    <view class="tip-title">使用提示</view>
+    <view class="tip-item">
+      <text>• 请确保车辆蓝牙已开启</text>
+    </view>
+    <view class="tip-item">
+      <text>• 请确保车辆在附近（10米内）</text>
+    </view>
+    <view class="tip-item">
+      <text>• 连接成功后，可以通过蓝牙控制车辆</text>
+    </view>
+  </view>
+</view>

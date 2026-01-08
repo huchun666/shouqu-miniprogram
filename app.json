@@ -1,0 +1,75 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/vehicle/control/control",
+    "pages/vehicle/status/status",
+    "pages/vehicle/find/find",
+    "pages/trip/record/record",
+    "pages/trip/detail/detail",
+    "pages/settings/vehicle/vehicle",
+    "pages/navigation/navigation",
+    "pages/battery/battery",
+    "pages/bluetooth/connect/connect",
+    "pages/community/community",
+    "pages/service/service",
+    "pages/profile/profile"
+  ],
+  "window": {
+    "navigationBarTitleText": "首驱电动车",
+    "navigationBarBackgroundColor": "#1a1a1a",
+    "navigationBarTextStyle": "white",
+    "backgroundColor": "#f5f5f5",
+    "backgroundTextStyle": "light",
+    "enablePullDownRefresh": false
+  },
+  "tabBar": {
+    "color": "#8a8a8a",
+    "selectedColor": "#1a1a1a",
+    "backgroundColor": "#ffffff",
+    "borderStyle": "black",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "assets/icons/home.png",
+        "selectedIconPath": "assets/icons/home-active.png"
+      },
+      {
+        "pagePath": "pages/trip/record/record",
+        "text": "行程",
+        "iconPath": "assets/icons/trip.png",
+        "selectedIconPath": "assets/icons/trip-active.png"
+      },
+      {
+        "pagePath": "pages/community/community",
+        "text": "社区",
+        "iconPath": "assets/icons/community.png",
+        "selectedIconPath": "assets/icons/community-active.png"
+      },
+      {
+        "pagePath": "pages/profile/profile",
+        "text": "我的",
+        "iconPath": "assets/icons/profile.png",
+        "selectedIconPath": "assets/icons/profile-active.png"
+      }
+    ]
+  },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "您的位置信息将用于车辆定位和导航功能"
+    },
+    "scope.bluetooth": {
+      "desc": "需要蓝牙权限以连接和控制车辆"
+    }
+  },
+  "requiredPrivateInfos": [
+    "getLocation"
+  ],
+  "style": "v2",
+  "sitemapLocation": "sitemap.json",
+  "lazyCodeLoading": "requiredComponents",
+  "networkTimeout": {
+    "request": 10000,
+    "downloadFile": 10000
+  }
+}

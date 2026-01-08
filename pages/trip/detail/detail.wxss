@@ -1,0 +1,102 @@
+/* pages/trip/detail/detail.wxss */
+.trip-overview {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24rpx;
+  margin-bottom: 32rpx;
+}
+
+.overview-item {
+  display: flex;
+  flex-direction: column;
+  padding: 24rpx;
+  background: #f8f8f8;
+  border-radius: 12rpx;
+}
+
+.overview-label {
+  font-size: 24rpx;
+  color: var(--text-secondary);
+  margin-bottom: 8rpx;
+}
+
+.overview-value {
+  font-size: 36rpx;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.trip-locations {
+  margin-bottom: 32rpx;
+}
+
+.location-item {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 32rpx;
+}
+
+.location-item:last-child {
+  margin-bottom: 0;
+}
+
+.location-marker {
+  width: 24rpx;
+  height: 24rpx;
+  border-radius: 50%;
+  margin-right: 24rpx;
+  margin-top: 8rpx;
+}
+
+.location-marker.start {
+  background: #07c160;
+}
+
+.location-marker.end {
+  background: #fa5151;
+}
+
+.location-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.location-label {
+  font-size: 24rpx;
+  color: var(--text-secondary);
+  margin-bottom: 8rpx;
+}
+
+.location-address {
+  font-size: 28rpx;
+  color: var(--text-primary);
+  line-height: 1.6;
+}
+
+.trip-time {
+  margin-bottom: 32rpx;
+}
+
+.time-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24rpx 0;
+  border-bottom: 1rpx solid var(--border-color);
+}
+
+.time-item:last-child {
+  border-bottom: none;
+}
+
+.time-label {
+  font-size: 28rpx;
+  color: var(--text-secondary);
+}
+
+.time-value {
+  font-size: 28rpx;
+  color: var(--text-primary);
+  font-weight: 500;
+}

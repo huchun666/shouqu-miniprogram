@@ -1,0 +1,75 @@
+<!--pages/navigation/navigation.wxml-->
+<view class="container">
+  <view class="nav-header">
+    <text class="title">导航</text>
+  </view>
+
+  <!-- 地图 -->
+  <view class="map-section card" wx:if="{{location}}">
+    <map
+      id="navMap"
+      longitude="{{location.longitude}}"
+      latitude="{{location.latitude}}"
+      scale="18"
+      markers="{{markers}}"
+      show-location
+      class="map">
+    </map>
+  </view>
+
+  <!-- 目的地选择 -->
+  <view class="destination-section card">
+    <view class="destination-item" bindtap="chooseDestination">
+      <text class="destination-label">目的地</text>
+      <text class="destination-value">{{destination ? destination.name : '请选择目的地'}}</text>
+      <text class="destination-arrow">></text>
+    </view>
+    <view class="destination-address" wx:if="{{destination && destination.address}}">
+      <text>{{destination.address}}</text>
+    </view>
+  </view>
+
+  <!-- 路线信息 -->
+  <view class="route-info card" wx:if="{{route && destination}}">
+    <view class="route-item">
+      <text class="route-label">总距离</text>
+      <text class="route-value">{{route.distance >= 1000 ? (route.distance/1000) + 'km' : route.distance + 'm'}}</text>
+    </view>
+    <view class="route-item">
+      <text class="route-label">预计时间</text>
+      <text class="route-value">{{route.estimatedTime >= 60 ? Math.floor(route.estimatedTime/60) + '分钟' : route.estimatedTime + '秒'}}</text>
+    </view>
+  </view>
+
+  <!-- 导航状态 -->
+  <view class="nav-status card" wx:if="{{navigating}}">
+    <view class="status-header">
+      <text class="status-title">导航中</text>
+      <text class="bluetooth-status-text" wx:if="{{bluetoothConnected}}">已投屏</text>
+    </view>
+    <view class="status-info">
+      <view class="status-item">
+        <text class="status-label">剩余距离</text>
+        <text class="status-value">{{remainingDistance >= 1000 ? (remainingDistance/1000) + 'km' : remainingDistance + 'm'}}</text>
+      </view>
+      <view class="status-item">
+        <text class="status-label">剩余时间</text>
+        <text class="status-value">{{remainingTime >= 60 ? Math.floor(remainingTime/60) + '分钟' : remainingTime + '秒'}}</text>
+      </view>
+    </view>
+    <button class="stop-nav-btn" bindtap="stopNavigation">停止导航</button>
+  </view>
+
+  <!-- 导航按钮 -->
+  <view class="nav-actions">
+    <button 
+      class="nav-btn" 
+      bindtap="startNavigation" 
+      disabled="{{!destination || navigating}}">
+      {{navigating ? '导航中...' : '开始导航'}}
+    </button>
+    <view class="bluetooth-tip" wx:if="{{bluetoothConnected && !navigating}}">
+      <text>💡 导航信息将自动投屏到车辆屏幕</text>
+    </view>
+  </view>
+</view>

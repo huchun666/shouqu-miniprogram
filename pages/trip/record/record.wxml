@@ -1,0 +1,72 @@
+<!--pages/trip/record/record.wxml-->
+<view class="container">
+  <!-- 统计卡片 -->
+  <view class="statistics-card card" wx:if="{{statistics}}">
+    <view class="stat-title">本月统计</view>
+    <view class="stat-grid">
+      <view class="stat-item">
+        <text class="stat-value">{{statistics.totalDistance || 0}}km</text>
+        <text class="stat-label">总里程</text>
+      </view>
+      <view class="stat-item">
+        <text class="stat-value">{{statistics.totalTrips || 0}}</text>
+        <text class="stat-label">总次数</text>
+      </view>
+      <view class="stat-item">
+        <text class="stat-value">{{statistics.totalDuration || 0}}</text>
+        <text class="stat-label">总时长</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 行程列表 -->
+  <view class="trip-list">
+    <view class="list-title">行程记录</view>
+    <view class="trip-item card" wx:for="{{tripList}}" wx:key="id" bindtap="viewDetail" data-id="{{item.id}}">
+      <view class="trip-header">
+        <view class="trip-date">
+          <text class="date-text">{{item.startTime}}</text>
+        </view>
+        <view class="trip-duration">
+          <text>{{item.duration}}分钟</text>
+        </view>
+      </view>
+      <view class="trip-info">
+        <view class="info-row">
+          <image class="info-icon" src="/assets/icons/location-start.png"></image>
+          <text class="info-text">{{item.startLocation.address || '未知起点'}}</text>
+        </view>
+        <view class="info-row">
+          <image class="info-icon" src="/assets/icons/location-end.png"></image>
+          <text class="info-text">{{item.endLocation.address || '未知终点'}}</text>
+        </view>
+      </view>
+      <view class="trip-stats">
+        <view class="stat-badge">
+          <text class="stat-label">距离</text>
+          <text class="stat-value">{{item.distance}}km</text>
+        </view>
+        <view class="stat-badge">
+          <text class="stat-label">平均速度</text>
+          <text class="stat-value">{{item.averageSpeed}}km/h</text>
+        </view>
+        <view class="stat-badge">
+          <text class="stat-label">最高速度</text>
+          <text class="stat-value">{{item.maxSpeed}}km/h</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="empty" wx:if="{{!loading && tripList.length === 0}}">
+      <text>暂无行程记录</text>
+    </view>
+
+    <view class="loading-more" wx:if="{{loading}}">
+      <text>加载中...</text>
+    </view>
+
+    <view class="no-more" wx:if="{{!hasMore && tripList.length > 0}}">
+      <text>没有更多了</text>
+    </view>
+  </view>
+</view>

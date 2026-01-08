@@ -1,0 +1,56 @@
+<!--pages/trip/detail/detail.wxml-->
+<view class="container" wx:if="{{trip}}">
+  <!-- 行程概览 -->
+  <view class="trip-overview card">
+    <view class="overview-item">
+      <text class="overview-label">距离</text>
+      <text class="overview-value">{{trip.distance}}km</text>
+    </view>
+    <view class="overview-item">
+      <text class="overview-label">时长</text>
+      <text class="overview-value">{{trip.duration}}分钟</text>
+    </view>
+    <view class="overview-item">
+      <text class="overview-label">平均速度</text>
+      <text class="overview-value">{{trip.averageSpeed}}km/h</text>
+    </view>
+    <view class="overview-item">
+      <text class="overview-label">最高速度</text>
+      <text class="overview-value">{{trip.maxSpeed}}km/h</text>
+    </view>
+  </view>
+
+  <!-- 起止位置 -->
+  <view class="trip-locations card">
+    <view class="location-item">
+      <view class="location-marker start"></view>
+      <view class="location-info">
+        <text class="location-label">起点</text>
+        <text class="location-address">{{trip.startLocation.address}}</text>
+      </view>
+    </view>
+    <view class="location-item">
+      <view class="location-marker end"></view>
+      <view class="location-info">
+        <text class="location-label">终点</text>
+        <text class="location-address">{{trip.endLocation.address}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 时间信息 -->
+  <view class="trip-time card">
+    <view class="time-item">
+      <text class="time-label">开始时间</text>
+      <text class="time-value">{{trip.startTime}}</text>
+    </view>
+    <view class="time-item">
+      <text class="time-label">结束时间</text>
+      <text class="time-value">{{trip.endTime}}</text>
+    </view>
+  </view>
+</view>
+
+<view class="empty" wx:else>
+  <text>加载中...</text>
+</view>

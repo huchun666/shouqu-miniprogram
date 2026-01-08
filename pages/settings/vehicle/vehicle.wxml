@@ -1,0 +1,93 @@
+<!--pages/settings/vehicle/vehicle.wxml-->
+<view class="container">
+  <view class="settings-header">
+    <text class="title">车辆设置</text>
+    <text class="subtitle">{{vehicle.name || '未连接'}}</text>
+  </view>
+
+  <!-- 大灯设置 -->
+  <view class="setting-section card">
+    <view class="setting-header">
+      <view class="setting-title">
+        <image class="setting-icon" src="/assets/icons/headlight.png"></image>
+        <text>大灯设置</text>
+      </view>
+      <switch 
+        checked="{{settings.headlight.enabled}}" 
+        bindchange="toggleHeadlight"
+        disabled="{{!isConnected}}"
+        color="#1a1a1a">
+      </switch>
+    </view>
+    <view class="setting-content" wx:if="{{settings.headlight.enabled}}">
+      <view class="slider-item">
+        <text class="slider-label">亮度</text>
+        <slider 
+          value="{{settings.headlight.brightness}}" 
+          min="0" 
+          max="100" 
+          step="5"
+          bindchange="changeBrightness"
+          disabled="{{!isConnected}}"
+          activeColor="#1a1a1a">
+        </slider>
+        <text class="slider-value">{{settings.headlight.brightness}}%</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 定速巡航设置 -->
+  <view class="setting-section card">
+    <view class="setting-header">
+      <view class="setting-title">
+        <image class="setting-icon" src="/assets/icons/cruise.png"></image>
+        <text>定速巡航</text>
+      </view>
+      <switch 
+        checked="{{settings.cruiseControl.enabled}}" 
+        bindchange="toggleCruiseControl"
+        disabled="{{!isConnected}}"
+        color="#1a1a1a">
+      </switch>
+    </view>
+    <view class="setting-content" wx:if="{{settings.cruiseControl.enabled}}">
+      <view class="slider-item">
+        <text class="slider-label">巡航速度</text>
+        <slider 
+          value="{{settings.cruiseControl.speed}}" 
+          min="10" 
+          max="50" 
+          step="5"
+          bindchange="changeCruiseSpeed"
+          disabled="{{!isConnected}}"
+          activeColor="#1a1a1a">
+        </slider>
+        <text class="slider-value">{{settings.cruiseControl.speed}}km/h</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 坐垫感应设置 -->
+  <view class="setting-section card">
+    <view class="setting-header">
+      <view class="setting-title">
+        <image class="setting-icon" src="/assets/icons/seat.png"></image>
+        <text>坐垫感应</text>
+      </view>
+      <switch 
+        checked="{{settings.seatSensor.enabled}}" 
+        bindchange="toggleSeatSensor"
+        disabled="{{!isConnected}}"
+        color="#1a1a1a">
+      </switch>
+    </view>
+    <view class="setting-desc" wx:if="{{settings.seatSensor.enabled}}">
+      <text>开启后，坐垫感应器将检测是否有人乘坐</text>
+    </view>
+  </view>
+
+  <!-- 提示 -->
+  <view class="tip-section" wx:if="{{!isConnected}}">
+    <text>车辆未连接，无法修改设置</text>
+  </view>
+</view>

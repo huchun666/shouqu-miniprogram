@@ -1,0 +1,90 @@
+<!--pages/vehicle/status/status.wxml-->
+<view class="container">
+  <view class="status-header">
+    <text class="title">实时状态</text>
+    <view class="online-status {{isOnline ? 'online' : 'offline'}}">
+      <text>{{isOnline ? '在线' : '离线'}}</text>
+    </view>
+  </view>
+
+  <view class="status-content" wx:if="{{status}}">
+    <!-- 电量信息 -->
+    <view class="status-section card">
+      <view class="section-title">电量信息</view>
+      <view class="battery-display">
+        <view class="battery-value">{{status.battery || 0}}%</view>
+        <view class="battery-bar">
+          <view class="battery-fill" style="width: {{status.battery || 0}}%"></view>
+        </view>
+      </view>
+      <view class="battery-details">
+        <view class="detail-item">
+          <text class="detail-label">预估续航</text>
+          <text class="detail-value">{{status.range || 0}}km</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 行驶信息 -->
+    <view class="status-section card">
+      <view class="section-title">行驶信息</view>
+      <view class="info-grid">
+        <view class="info-item">
+          <text class="info-label">当前速度</text>
+          <text class="info-value">{{status.speed || 0}}km/h</text>
+        </view>
+        <view class="info-item">
+          <text class="info-label">总里程</text>
+          <text class="info-value">{{status.totalMileage || 0}}km</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 位置信息 -->
+    <view class="status-section card" wx:if="{{status.location}}">
+      <view class="section-title">位置信息</view>
+      <view class="location-info">
+        <text class="location-address">{{status.location.address || '未知位置'}}</text>
+        <view class="location-coords">
+          <text>经度: {{status.location.longitude}}</text>
+          <text>纬度: {{status.location.latitude}}</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 其他信息 -->
+    <view class="status-section card">
+      <view class="section-title">其他信息</view>
+      <view class="other-info">
+        <view class="info-row">
+          <text class="info-label">锁定状态</text>
+          <text class="info-value {{status.isLocked ? 'locked' : 'unlocked'}}">
+            {{status.isLocked ? '已锁定' : '未锁定'}}
+          </text>
+        </view>
+        <view class="info-row">
+          <text class="info-label">报警状态</text>
+          <text class="info-value {{status.isAlarmOn ? 'alarm-on' : 'alarm-off'}}">
+            {{status.isAlarmOn ? '已开启' : '已关闭'}}
+          </text>
+        </view>
+        <view class="info-row" wx:if="{{status.temperature}}">
+          <text class="info-label">温度</text>
+          <text class="info-value">{{status.temperature}}℃</text>
+        </view>
+        <view class="info-row" wx:if="{{status.signal !== undefined}}">
+          <text class="info-label">信号强度</text>
+          <text class="info-value">{{status.signal}}%</text>
+        </view>
+        <view class="info-row" wx:if="{{status.timestamp}}">
+          <text class="info-label">更新时间</text>
+          <text class="info-value">{{status.timestamp}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="empty" wx:else>
+    <text>暂无状态信息</text>
+  </view>
+</view>

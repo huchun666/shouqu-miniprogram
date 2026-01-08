@@ -1,0 +1,90 @@
+<!--pages/vehicle/control/control.wxml-->
+<view class="container">
+  <view class="control-header">
+    <text class="title">车辆控制</text>
+    <text class="subtitle">{{vehicle.name || '未连接'}}</text>
+  </view>
+
+  <!-- 主要控制按钮 -->
+  <view class="main-controls card">
+    <view class="control-row">
+      <button 
+        class="control-btn unlock-btn {{isLocked ? '' : 'disabled'}}" 
+        bindtap="handleUnlock"
+        disabled="{{!isLocked || !isConnected}}">
+        <image class="btn-icon" src="/assets/icons/unlock.png"></image>
+        <text>解锁</text>
+      </button>
+      <button 
+        class="control-btn lock-btn {{!isLocked ? '' : 'disabled'}}" 
+        bindtap="handleLock"
+        disabled="{{isLocked || !isConnected}}">
+        <image class="btn-icon" src="/assets/icons/lock.png"></image>
+        <text>锁定</text>
+      </button>
+    </view>
+    <view class="control-row">
+      <button 
+        class="control-btn start-btn" 
+        bindtap="handleStart"
+        disabled="{{isLocked || !isConnected}}">
+        <image class="btn-icon" src="/assets/icons/start.png"></image>
+        <text>启动</text>
+      </button>
+      <button 
+        class="control-btn stop-btn" 
+        bindtap="handleStop"
+        disabled="{{!isConnected}}">
+        <image class="btn-icon" src="/assets/icons/stop.png"></image>
+        <text>停止</text>
+      </button>
+    </view>
+  </view>
+
+  <!-- 其他功能 -->
+  <view class="other-controls card">
+    <view class="section-title">其他功能</view>
+    <view class="control-item" bindtap="handleFind">
+      <view class="control-item-left">
+        <image class="control-icon" src="/assets/icons/find.png"></image>
+        <text class="control-text">寻车</text>
+        <text class="control-desc">车辆鸣笛并闪灯</text>
+      </view>
+      <text class="control-arrow">></text>
+    </view>
+    <view class="control-item" bindtap="goToSettings">
+      <view class="control-item-left">
+        <image class="control-icon" src="/assets/icons/settings.png"></image>
+        <text class="control-text">车辆设置</text>
+        <text class="control-desc">大灯、定速巡航等</text>
+      </view>
+      <text class="control-arrow">></text>
+    </view>
+  </view>
+
+  <!-- 蓝牙连接提示 -->
+  <view class="bluetooth-section card" wx:if="{{!bluetoothConnected}}">
+    <view class="bluetooth-header">
+      <view class="bluetooth-info">
+        <text class="bluetooth-title">蓝牙控制</text>
+        <text class="bluetooth-desc">连接蓝牙后可近距离控制车辆</text>
+      </view>
+      <button class="bluetooth-btn" bindtap="goToBluetoothConnect">连接</button>
+    </view>
+  </view>
+
+  <view class="bluetooth-status card" wx:else>
+    <view class="bluetooth-header">
+      <view class="bluetooth-info">
+        <text class="bluetooth-title">蓝牙已连接</text>
+        <text class="bluetooth-desc">当前使用蓝牙控制模式</text>
+      </view>
+      <view class="bluetooth-indicator"></view>
+    </view>
+  </view>
+
+  <!-- 状态提示 -->
+  <view class="status-tip" wx:if="{{!isConnected && !bluetoothConnected}}">
+    <text>车辆未连接，部分功能不可用</text>
+  </view>
+</view>

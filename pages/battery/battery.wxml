@@ -1,0 +1,90 @@
+<!--pages/battery/battery.wxml-->
+<view class="container">
+  <view class="battery-header">
+    <text class="title">电池管理</text>
+  </view>
+
+  <!-- 电池状态卡片 -->
+  <view class="battery-status-card card" wx:if="{{batteryInfo}}">
+    <view class="battery-display">
+      <view class="battery-level">{{batteryInfo.level}}%</view>
+      <view class="battery-bar-large">
+        <view class="battery-fill-large" style="width: {{batteryInfo.level}}%"></view>
+      </view>
+    </view>
+    <view class="battery-status">
+      <text class="status-text">状态: {{batteryInfo.status === 'charging' ? '充电中' : batteryInfo.status === 'discharging' ? '放电中' : batteryInfo.status === 'full' ? '已充满' : '低电量'}}</text>
+    </view>
+  </view>
+
+  <!-- 电池详细信息 -->
+  <view class="battery-info-section card" wx:if="{{batteryInfo}}">
+    <view class="section-title">电池信息</view>
+    <view class="info-list">
+      <view class="info-item">
+        <text class="info-label">电压</text>
+        <text class="info-value">{{batteryInfo.voltage}}V</text>
+      </view>
+      <view class="info-item">
+        <text class="info-label">电流</text>
+        <text class="info-value">{{batteryInfo.current}}A</text>
+      </view>
+      <view class="info-item">
+        <text class="info-label">温度</text>
+        <text class="info-value">{{batteryInfo.temperature}}℃</text>
+      </view>
+      <view class="info-item">
+        <text class="info-label">预估续航</text>
+        <text class="info-value">{{batteryInfo.estimatedRange}}km</text>
+      </view>
+      <view class="info-item" wx:if="{{batteryInfo.chargingTime}}">
+        <text class="info-label">预计充电时间</text>
+        <text class="info-value">{{batteryInfo.chargingTime}}分钟</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 电池健康度 -->
+  <view class="battery-health-section card" wx:if="{{batteryHealth}}">
+    <view class="section-title">电池健康</view>
+    <view class="health-display">
+      <view class="health-circle">
+        <text class="health-value">{{batteryHealth.health}}%</text>
+        <text class="health-label">健康度</text>
+      </view>
+      <view class="health-info">
+        <view class="health-item">
+          <text class="health-item-label">循环次数</text>
+          <text class="health-item-value">{{batteryHealth.cycleCount}}</text>
+        </view>
+        <view class="health-item" wx:if="{{batteryHealth.lastChargeTime}}">
+          <text class="health-item-label">上次充电</text>
+          <text class="health-item-value">{{batteryHealth.lastChargeTime}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 使用提示 -->
+  <view class="tips-section card">
+    <view class="section-title">使用提示</view>
+    <view class="tip-list">
+      <view class="tip-item">
+        <text>• 建议电量低于20%时及时充电</text>
+      </view>
+      <view class="tip-item">
+        <text>• 避免长时间过度充电或过度放电</text>
+      </view>
+      <view class="tip-item">
+        <text>• 定期检查电池健康状态</text>
+      </view>
+      <view class="tip-item">
+        <text>• 如发现电池异常，请及时联系售后服务</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- <view class="empty" wx:else>
+    <text>暂无电池信息</text>
+  </view> -->
+</view>

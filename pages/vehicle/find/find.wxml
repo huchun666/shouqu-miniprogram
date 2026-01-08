@@ -1,0 +1,55 @@
+<!--pages/vehicle/find/find.wxml-->
+<view class="container">
+  <view class="find-header">
+    <text class="title">智能寻车</text>
+  </view>
+
+  <!-- 地图区域 -->
+  <view class="map-section card" wx:if="{{location}}">
+    <map
+      id="vehicleMap"
+      longitude="{{location.longitude}}"
+      latitude="{{location.latitude}}"
+      scale="18"
+      markers="{{markers}}"
+      show-location
+      class="map">
+    </map>
+    <view class="map-overlay">
+      <view class="location-info">
+        <text class="location-address">{{location.address || '未知位置'}}</text>
+        <text class="location-time">更新时间: {{location.timestamp || '未知'}}</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="empty-map card" wx:else>
+    <text>暂无位置信息</text>
+  </view>
+
+  <!-- 操作按钮 -->
+  <view class="actions card">
+    <button class="action-btn find-btn" bindtap="handleFind" disabled="{{!isConnected}}">
+      <image class="btn-icon" src="/assets/icons/find.png"></image>
+      <text>寻车（鸣笛+闪灯）</text>
+    </button>
+    <button class="action-btn map-btn" bindtap="openMap" disabled="{{!location}}">
+      <image class="btn-icon" src="/assets/icons/map.png"></image>
+      <text>打开地图导航</text>
+    </button>
+  </view>
+
+  <!-- 提示信息 -->
+  <view class="tips card">
+    <view class="tip-title">使用提示</view>
+    <view class="tip-item">
+      <text>• 寻车功能会让车辆鸣笛并闪灯，方便您快速找到车辆</text>
+    </view>
+    <view class="tip-item">
+      <text>• 如果车辆离线，寻车功能可能无法使用</text>
+    </view>
+    <view class="tip-item">
+      <text>• 位置信息会定期更新，如果位置不准确，请刷新</text>
+    </view>
+  </view>
+</view>

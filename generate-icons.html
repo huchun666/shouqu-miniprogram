@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>图标占位符生成器</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        h1 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+        .icon-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .icon-item {
+            border: 1px solid #e5e5e5;
+            border-radius: 4px;
+            padding: 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .icon-item:hover {
+            border-color: #1a1a1a;
+            transform: translateY(-2px);
+        }
+        .icon-preview {
+            width: 48px;
+            height: 48px;
+            margin: 0 auto 10px;
+            background: #1a1a1a;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 20px;
+        }
+        .icon-name {
+            font-size: 12px;
+            color: #666;
+            word-break: break-all;
+        }
+        .btn {
+            background: #1a1a1a;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        .btn:hover {
+            background: #333;
+        }
+        .info {
+            background: #e3f2fd;
+            padding: 15px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            font-size: 14px;
+            color: #1976d2;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>图标占位符生成器</h1>
+        <div class="info">
+            <strong>使用说明：</strong><br>
+            1. 点击下方图标可以预览<br>
+            2. 右键点击图标选择"图片另存为"保存<br>
+            3. 保存到项目的 assets/icons/ 目录<br>
+            4. 文件名需要与代码中引用的名称一致
+        </div>
+        
+        <div class="icon-list" id="iconList"></div>
+        
+        <button class="btn" onclick="downloadAll()">批量下载提示</button>
+    </div>
+
+    <script>
+        const icons = [
+            // TabBar图标
+            { name: 'home', size: 81, emoji: '🏠' },
+            { name: 'home-active', size: 81, emoji: '🏠' },
+            { name: 'trip', size: 81, emoji: '📊' },
+            { name: 'trip-active', size: 81, emoji: '📊' },
+            { name: 'community', size: 81, emoji: '👥' },
+            { name: 'community-active', size: 81, emoji: '👥' },
+            { name: 'profile', size: 81, emoji: '👤' },
+            { name: 'profile-active', size: 81, emoji: '👤' },
+            // 功能图标
+            { name: 'unlock', size: 48, emoji: '🔓' },
+            { name: 'lock', size: 48, emoji: '🔒' },
+            { name: 'start', size: 48, emoji: '▶️' },
+            { name: 'stop', size: 48, emoji: '⏹️' },
+            { name: 'find', size: 48, emoji: '🔍' },
+            { name: 'control', size: 48, emoji: '🎮' },
+            { name: 'status', size: 48, emoji: '📈' },
+            { name: 'battery', size: 48, emoji: '🔋' },
+            { name: 'settings', size: 48, emoji: '⚙️' },
+            { name: 'headlight', size: 48, emoji: '💡' },
+            { name: 'cruise', size: 48, emoji: '🚗' },
+            { name: 'seat', size: 48, emoji: '🪑' },
+            { name: 'map', size: 48, emoji: '🗺️' },
+            { name: 'marker', size: 40, emoji: '📍' },
+            { name: 'location-start', size: 32, emoji: '🟢' },
+            { name: 'location-end', size: 32, emoji: '🔴' },
+            { name: 'store', size: 48, emoji: '🏪' },
+            { name: 'repair', size: 48, emoji: '🔧' },
+            { name: 'list', size: 48, emoji: '📋' },
+            { name: 'vehicle', size: 48, emoji: '🛵' },
+            { name: 'about', size: 48, emoji: 'ℹ️' },
+            { name: 'avatar-default', size: 120, emoji: '👤' },
+        ];
+
+        function createIcon(icon) {
+            const canvas = document.createElement('canvas');
+            canvas.width = icon.size;
+            canvas.height = icon.size;
+            const ctx = canvas.getContext('2d');
+            
+            // 绘制背景
+            ctx.fillStyle = '#1a1a1a';
+            ctx.fillRect(0, 0, icon.size, icon.size);
+            
+            // 绘制emoji（简化版，实际可以使用图片）
+            ctx.fillStyle = '#ffffff';
+            ctx.font = `${icon.size * 0.6}px Arial`;
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText(icon.emoji, icon.size / 2, icon.size / 2);
+            
+            return canvas.toDataURL('image/png');
+        }
+
+        function renderIcons() {
+            const list = document.getElementById('iconList');
+            icons.forEach(icon => {
+                const item = document.createElement('div');
+                item.className = 'icon-item';
+                item.innerHTML = `
+                    <canvas class="icon-preview" width="${icon.size}" height="${icon.size}" 
+                            data-name="${icon.name}" data-size="${icon.size}"></canvas>
+                    <div class="icon-name">${icon.name}.png</div>
+                `;
+                
+                const canvas = item.querySelector('canvas');
+                const ctx = canvas.getContext('2d');
+                const img = new Image();
+                img.onload = () => {
+                    ctx.drawImage(img, 0, 0, icon.size, icon.size);
+                };
+                img.src = createIcon(icon);
+                
+                canvas.onclick = () => {
+                    const link = document.createElement('a');
+                    link.download = `${icon.name}.png`;
+                    link.href = createIcon(icon);
+                    link.click();
+                };
+                
+                list.appendChild(item);
+            });
+        }
+
+        function downloadAll() {
+            alert('请逐个点击图标进行下载，或使用浏览器开发者工具批量下载。\n\n提示：可以使用浏览器扩展或脚本批量下载。');
+        }
+
+        renderIcons();
+    </script>
+</body>
+</html>
