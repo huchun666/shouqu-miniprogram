@@ -1,18 +1,10 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/vehicle/control/control",
-    "pages/vehicle/status/status",
     "pages/vehicle/find/find",
-    "pages/trip/record/record",
-    "pages/trip/detail/detail",
-    "pages/settings/vehicle/vehicle",
     "pages/navigation/navigation",
-    "pages/battery/battery",
     "pages/bluetooth/connect/connect",
-    "pages/community/community",
-    "pages/service/service",
-    "pages/profile/profile"
+    "pages/my/my"
   ],
   "window": {
     "navigationBarTitleText": "首驱电动车",
@@ -35,19 +27,7 @@
         "selectedIconPath": "assets/icons/home-active.png"
       },
       {
-        "pagePath": "pages/trip/record/record",
-        "text": "行程",
-        "iconPath": "assets/icons/trip.png",
-        "selectedIconPath": "assets/icons/trip-active.png"
-      },
-      {
-        "pagePath": "pages/community/community",
-        "text": "社区",
-        "iconPath": "assets/icons/community.png",
-        "selectedIconPath": "assets/icons/community-active.png"
-      },
-      {
-        "pagePath": "pages/profile/profile",
+        "pagePath": "pages/my/my",
         "text": "我的",
         "iconPath": "assets/icons/profile.png",
         "selectedIconPath": "assets/icons/profile-active.png"

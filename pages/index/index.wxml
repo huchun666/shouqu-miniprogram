@@ -56,10 +56,6 @@
         <image class="action-icon" src="/assets/icons/find.png"></image>
         <text class="action-text">寻车</text>
       </view>
-      <view class="action-item" bindtap="goToControl">
-        <image class="action-icon" src="/assets/icons/control.png"></image>
-        <text class="action-text">控制</text>
-      </view>
     </view>
   </view>
 
@@ -67,27 +63,6 @@
   <view class="features card">
     <view class="section-title">功能</view>
     <view class="feature-list">
-      <view class="feature-item" bindtap="goToStatus">
-        <view class="feature-left">
-          <image class="feature-icon" src="/assets/icons/status.png"></image>
-          <text class="feature-text">实时状态</text>
-        </view>
-        <text class="feature-arrow">></text>
-      </view>
-      <view class="feature-item" bindtap="goToTrip">
-        <view class="feature-left">
-          <image class="feature-icon" src="/assets/icons/trip.png"></image>
-          <text class="feature-text">行程记录</text>
-        </view>
-        <text class="feature-arrow">></text>
-      </view>
-      <view class="feature-item" bindtap="goToBattery">
-        <view class="feature-left">
-          <image class="feature-icon" src="/assets/icons/battery.png"></image>
-          <text class="feature-text">电池管理</text>
-        </view>
-        <text class="feature-arrow">></text>
-      </view>
       <view class="feature-item" bindtap="goToBluetooth">
         <view class="feature-left">
           <image class="feature-icon" src="/assets/icons/bluetooth.png"></image>

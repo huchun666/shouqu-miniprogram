@@ -100,9 +100,9 @@
 .stop-btn,
 .refresh-btn {
   flex: 1;
-  height: 72rpx;
+  height: 64rpx;
   border-radius: 36rpx;
-  font-size: 28rpx;
+  font-size: 24rpx;
   border: none;
 }
 

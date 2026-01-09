@@ -123,13 +123,6 @@ Page({
   },
 
   /**
-   * 跳转到车辆控制页面
-   */
-  goToControl() {
-    navigateTo('/pages/vehicle/control/control');
-  },
-
-  /**
    * 跳转到车辆状态页面
    */
   goToStatus() {

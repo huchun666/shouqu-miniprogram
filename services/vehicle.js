@@ -97,18 +97,6 @@ export const updateVehicleSettings = (vehicleId, settings) => {
 };
 
 /**
- * 开启/关闭大灯
- */
-export const toggleHeadlight = (vehicleId, enabled, brightness = 50) => {
-  return updateVehicleSettings(vehicleId, {
-    headlight: {
-      enabled,
-      brightness
-    }
-  });
-};
-
-/**
  * 设置定速巡航
  */
 export const setCruiseControl = (vehicleId, enabled, speed = 25) => {
@@ -145,7 +133,6 @@ export default {
   getVehicleLocation,
   getVehicleSettings,
   updateVehicleSettings,
-  toggleHeadlight,
   setCruiseControl,
   setSeatSensor
 };

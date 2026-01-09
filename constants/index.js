@@ -99,16 +99,8 @@ export const STORAGE_KEYS = {
  */
 export const PAGE_PATHS = {
   INDEX: '/pages/index/index',
-  VEHICLE_CONTROL: '/pages/vehicle/control/control',
-  VEHICLE_STATUS: '/pages/vehicle/status/status',
   VEHICLE_FIND: '/pages/vehicle/find/find',
-  TRIP_RECORD: '/pages/trip/record/record',
-  TRIP_DETAIL: '/pages/trip/detail/detail',
-  SETTINGS_VEHICLE: '/pages/settings/vehicle/vehicle',
   NAVIGATION: '/pages/navigation/navigation',
-  BATTERY: '/pages/battery/battery',
-  COMMUNITY: '/pages/community/community',
-  SERVICE: '/pages/service/service',
   PROFILE: '/pages/profile/profile'
 };
 
