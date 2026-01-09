@@ -7,7 +7,7 @@ import {
   disconnectVehicle,
   getScannedDevices,
   getBluetoothConnectionStatus
-} from '../../../services/bluetooth';
+} from '../../../hooks/bluetooth';
 import { showLoading, hideLoading, showToast } from '../../../utils/ui';
 
 Page({

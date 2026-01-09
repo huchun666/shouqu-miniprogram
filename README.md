@@ -26,14 +26,7 @@ mini-program/
 ├── pages/              # 页面目录
 │   ├── index/         # 首页
 │   ├── vehicle/       # 车辆相关页面
-│   │   ├── control/   # 车辆控制
-│   │   ├── status/    # 车辆状态
 │   │   └── find/       # 寻车
-│   ├── trip/          # 行程相关
-│   ├── settings/      # 设置相关
-│   ├── battery/       # 电池管理
-│   ├── community/     # 社区
-│   ├── service/       # 售后服务
 │   └── profile/       # 个人中心
 ├── services/          # 服务层（API调用）
 ├── stores/            # 状态管理
@@ -43,7 +36,6 @@ mini-program/
 │   ├── logger.js      # 日志系统
 │   ├── ui.js          # UI工具函数
 │   └── format.js      # 格式化工具
-├── types/             # 类型定义
 ├── constants/         # 常量定义
 ├── app.js            # 小程序入口
 ├── app.json          # 小程序配置

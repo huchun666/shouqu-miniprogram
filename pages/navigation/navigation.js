@@ -26,8 +26,6 @@ Page({
     remainingDistance: 0,
     remainingTime: 0,
     navigationTimer: null,
-    formatDistance: formatDistanceForPage,
-    formatTime: formatTimeForPage
   },
 
   onLoad() {
@@ -94,6 +92,13 @@ Page({
    */
   async chooseDestination() {
     try {
+      // 先检查位置权限
+      const locationAuth = await this.checkLocationPermission();
+      if (!locationAuth) {
+        showToast('需要位置权限才能选择目的地');
+        return;
+      }
+
       showLoading('加载中...');
       const destination = await chooseDestination();
       
@@ -143,12 +148,68 @@ Page({
         this.setData({ destination });
       }
     } catch (error) {
-      if (error.errMsg && !error.errMsg.includes('cancel')) {
-        showToast('选择目的地失败');
+      console.error('选择目的地错误详情:', error);
+      
+      // 详细错误处理
+      if (error.errMsg) {
+        if (error.errMsg.includes('cancel')) {
+          // 用户取消，不显示错误
+          return;
+        } else if (error.errMsg.includes('auth deny') || error.errMsg.includes('permission')) {
+          showToast('需要位置权限，请在设置中开启');
+        } else if (error.errMsg.includes('fail')) {
+          showToast('选择目的地失败：' + error.errMsg);
+        } else {
+          showToast('选择目的地失败：' + error.errMsg);
+        }
+      } else {
+        showToast('选择目的地失败，请重试');
       }
     } finally {
       hideLoading();
     }
+  },
+
+  /**
+   * 检查位置权限
+   */
+  async checkLocationPermission() {
+    return new Promise((resolve) => {
+      wx.getSetting({
+        success: (res) => {
+          if (res.authSetting['scope.userLocation'] === false) {
+            // 用户之前拒绝了权限，需要引导开启
+            wx.showModal({
+              title: '需要位置权限',
+              content: '选择目的地需要位置权限，是否前往设置开启？',
+              success: (modalRes) => {
+                if (modalRes.confirm) {
+                  wx.openSetting({
+                    success: (settingRes) => {
+                      resolve(settingRes.authSetting['scope.userLocation'] === true);
+                    },
+                    fail: () => {
+                      resolve(false);
+                    }
+                  });
+                } else {
+                  resolve(false);
+                }
+              }
+            });
+          } else if (res.authSetting['scope.userLocation'] === true) {
+            // 已授权
+            resolve(true);
+          } else {
+            // 未询问过，直接授权
+            resolve(true);
+          }
+        },
+        fail: () => {
+          resolve(false);
+        }
+      });
+    });
   },
 
   /**

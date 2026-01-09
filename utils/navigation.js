@@ -6,17 +6,45 @@ import { showToast } from './ui';
  */
 export const chooseDestination = () => {
   return new Promise((resolve, reject) => {
-    wx.chooseLocation({
-      success: (res) => {
-        resolve({
-          latitude: res.latitude,
-          longitude: res.longitude,
-          name: res.name,
-          address: res.address
+    // 先尝试获取当前位置（用于地图选点时的初始位置）
+    wx.getLocation({
+      type: 'gcj02',
+      success: (locationRes) => {
+        // 获取位置成功后，打开选点界面
+        wx.chooseLocation({
+          latitude: locationRes.latitude,
+          longitude: locationRes.longitude,
+          success: (res) => {
+            resolve({
+              latitude: res.latitude,
+              longitude: res.longitude,
+              name: res.name,
+              address: res.address
+            });
+          },
+          fail: (error) => {
+            console.error('chooseLocation失败:', error);
+            reject(error);
+          }
         });
       },
-      fail: (error) => {
-        reject(error);
+      fail: (locationError) => {
+        console.error('getLocation失败:', locationError);
+        // 即使获取位置失败，也尝试打开选点界面（可能用户会手动选择）
+        wx.chooseLocation({
+          success: (res) => {
+            resolve({
+              latitude: res.latitude,
+              longitude: res.longitude,
+              name: res.name,
+              address: res.address
+            });
+          },
+          fail: (error) => {
+            console.error('chooseLocation失败:', error);
+            reject(error);
+          }
+        });
       }
     });
   });
