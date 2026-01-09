@@ -1,6 +1,4 @@
 // utils/navigation.js - 导航工具函数
-import { showToast } from './ui';
-
 /**
  * 选择目的地（使用微信地图选点）
  */

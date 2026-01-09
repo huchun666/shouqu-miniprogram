@@ -5,9 +5,8 @@ import {
   stopScan, 
   connectVehicle,
   disconnectVehicle,
-  getScannedDevices,
   getBluetoothConnectionStatus
-} from '../../../hooks/bluetooth';
+} from '../../../features/bluetooth';
 import { showLoading, hideLoading, showToast } from '../../../utils/ui';
 
 Page({

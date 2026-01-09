@@ -4,9 +4,8 @@ import {
   unlockVehicleViaBluetooth, 
   lockVehicleViaBluetooth,
   getBluetoothConnectionStatus 
-} from '../../hooks/bluetooth';
-import { navigateTo } from '../../utils/ui';
-import { showLoading, hideLoading, showToast } from '../../utils/ui';
+} from '../../features/bluetooth';
+import { showLoading, hideLoading, showToast, navigateTo } from '../../utils/ui';
 
 Page({
   data: {
